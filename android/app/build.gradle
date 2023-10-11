@@ -74,9 +74,9 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    namespace "com.rntypescriptboilerplate"
+    namespace "com.AccountKitBoilerplate"
     defaultConfig {
-        applicationId "com.rntypescriptboilerplate"
+        applicationId "com.AccountKitBoilerplate"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
