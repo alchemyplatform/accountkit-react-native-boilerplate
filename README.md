@@ -1,32 +1,10 @@
-<img alt="React Native Typescript Boilerplate" src="assets/logo.png" width="1050"/>
-
 [![A lot of fundamental features with Typescript support React Native Boilerplate](https://img.shields.io/badge/-A%20lot%20of%20fundamental%20features%20with%20Typescript%20support%20React%20Native%20Boilerplate-orange?style=for-the-badge)](https://github.com/WrathChaos/react-native-typescript-boilerplate)
 
-[![npm version](https://img.shields.io/npm/v/react-native-typescript-boilerplate.svg?style=for-the-badge)](https://www.npmjs.com/package/@freakycoder/react-native-typescript-boilerplate)
-[![npm](https://img.shields.io/npm/dt/react-native-typescript-boilerplate.svg?style=for-the-badge)](https://www.npmjs.com/package/@freakycoder/react-native-typescript-boilerplate)
 ![Platform - Android and iOS](https://img.shields.io/badge/platform-Android%20%7C%20iOS-blue.svg?style=for-the-badge)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg?style=for-the-badge)](https://github.com/prettier/prettier)
 
-<p align="center">
-  <img alt="React Native Typescript Boilerplate"
-        src="assets/react-native-typescript-boilerplate.gif" height="650" width="325" />
-</p>
-
-# 🥳 Version 3.5 is here 😍
-
-We're proudly announce that `Version 3.5` is here!
-
-- Native Splash Screen
-- New React Native Architecture Ready **(RN 0.71+)** 🍻
-- Awesome Theme Support for both Light / Dark Mode 🌙
-- Latest `React` and `React Native` Dependencies 🌟
-- All Dependencies are Upgraded
-- New GIF with the Project Example for Theming
-- Much Better Documentation
-- Detailed Roadmap
-
-# 🐶 What's Included?
+# What's Included?
 
 - **Typescript**
 - **Flipper Ready**
@@ -71,7 +49,7 @@ We're proudly announce that `Version 3.5` is here!
 
 - **More and more! :)**
 
-# 🚀 Getting Started
+# Getting Started
 
 ## Quick Start
 
@@ -81,7 +59,7 @@ To create a new project using the barebone boilerplate:
 git clone https://github.com/WrathChaos/react-native-typescript-boilerplate.git my-app-name
 ```
 
-# 🎯 Step By Step Guide
+# Step By Step Guide
 
 ## Clean-Up & Simple Run
 
@@ -159,14 +137,14 @@ sdk.dir=/Users/username/Library/Android/sdk
 
 - `cd .. & react-native run-ios/android`
 
-# 📃 Documentations
+# Documentations
 
 - [Components](./docs/components.md)
 - [Axios Hooks](./docs/axios-hooks.md)
 - [Event Emitter Usage](./docs/event-emitter.md)
 - [Project Structure](./docs/project-structure.md)
 
-# 🔮 Roadmap
+# Roadmap
 
 - [x] ~~LICENSE~~
 - [x] ~~Better Husky: Linter, Prettier and Commintlint~~
@@ -191,13 +169,7 @@ sdk.dir=/Users/username/Library/Android/sdk
 
 ## Credits
 
-<span>Photo by <a href="https://unsplash.com/@sotti?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Shifaaz shamoon</a> on <a href="https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></span>
-
-<span>Photo by <a href="https://unsplash.com/@jamie452?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Jamie Street</a> on <a href="https://unsplash.com/s/photos/profile-picture?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></span>
-
-## Author
-
-FreakyCoder, kurayogun@gmail.com
+[FreakyCoder](https://github.com/WrathChaos/react-native-typescript-boilerplate)
 
 ## License
 
