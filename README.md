@@ -1,4 +1,6 @@
-[![A lot of fundamental features with Typescript support React Native Boilerplate](https://img.shields.io/badge/-A%20lot%20of%20fundamental%20features%20with%20Typescript%20support%20React%20Native%20Boilerplate-orange?style=for-the-badge)](https://github.com/WrathChaos/react-native-typescript-boilerplate)
+<img alt="Alchemy AA-SDK React Native boilerplate with Typescript, Viem, and Wagmi" src="assets/logo.png" width="1050"/>
+
+[![A lot of fundamental features with Typescript support React Native Boilerplate](https://img.shields.io/badge/-A%20lot%20of%20fundamental%20features%20with%20Typescript%20support%20React%20Native%20Boilerplate-orange?style=for-the-badge)](https://github.com/alchemyplatform/accountkit-react-native-boilerplate)
 
 ![Platform - Android and iOS](https://img.shields.io/badge/platform-Android%20%7C%20iOS-blue.svg?style=for-the-badge)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
@@ -44,6 +46,7 @@
   - Auto prettier on pre-commit
   - Awesome ESLint Integration
 - **Built-in Custom Font Implementation**
+
   - All you need to do is copy-paste the .tff files into `assets/fonts` folder
   - Run `npx react-native-asset` command
 
@@ -56,7 +59,7 @@
 To create a new project using the barebone boilerplate:
 
 ```sh
-git clone https://github.com/WrathChaos/react-native-typescript-boilerplate.git my-app-name
+git clone https://github.com/alchemyplatform/accountkit-react-native-boilerplate my-app-name
 ```
 
 # Step By Step Guide

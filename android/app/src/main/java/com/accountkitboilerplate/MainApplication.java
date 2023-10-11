@@ -1,4 +1,4 @@
-package com.rntypescriptboilerplate;
+package com.AccountKitBoilerplate;
 
 
 import android.app.Application;
