@@ -1,8 +1,12 @@
 ## Summary
 
-Jira Tickets:
+Github Issue Tickets:
 
-- [HELLO-310](your-jira-ticket-link)
+- [ISSUE-310](github-issue-link)
+
+Asana Task Tickets:
+
+- [TASK-310](asana-task-link)
 
 ## Type of change
 

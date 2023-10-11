@@ -1,8 +1,11 @@
 {
-  "name": "react-native-typescript-boilerplate",
+  "name": "accountkit-react-native-boilerplate",
   "version": "3.5.1",
-  "description": "React Native Template/Boilerplate for awesome applications, using Typescript with a lot of built-in ready features.",
+  "description": "Alchemy AA-SDK React Native boilerplate with Typescript, Viem, and Wagmi",
   "dependencies": {
+    "@alchemy/aa-accounts": "^0.1.0",
+    "@alchemy/aa-alchemy": "^0.1.0",
+    "@alchemy/aa-core": "^0.1.0",
     "@freakycoder/react-native-bounceable": "1.0.3",
     "@freakycoder/react-native-custom-text": "0.1.2",
     "@freakycoder/react-native-helpers": "2.0.0",
@@ -23,7 +26,8 @@
     "react-native-screens": "^3.15.0",
     "react-native-splash-screen": "^3.3.0",
     "react-native-vector-icons": "^9.2.0",
-    "react-navigation-helpers": "^2.1.0"
+    "react-navigation-helpers": "^2.1.0",
+    "viem": "^1.16.2"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
