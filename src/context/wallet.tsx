@@ -1,28 +1,30 @@
 import { AlchemyProvider } from "@alchemy/aa-alchemy";
 import { Address } from "@alchemy/aa-core";
 import { useAlchemyProvider } from "@hooks/useAlchemyProvider";
+import { useAsyncEffect } from "@hooks/useAsyncEffect";
 import { useMagicSigner } from "@hooks/useMagicSigner";
+import { OAuthRedirectResult } from "@magic-ext/react-native-bare-oauth";
 import { entryPointAddress } from "@shared-config/env";
 import React, {
   ReactNode,
   createContext,
   useCallback,
   useContext,
-  useEffect,
   useState,
 } from "react";
+import { MagicAuth, MagicAuthType } from "types/magic";
+import { useAlertContext } from "./alert";
 
 type WalletContextProps = {
   // Functions
-  login: (email: string) => Promise<void>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  login: (type: MagicAuthType, ...params: any[]) => Promise<void>;
   logout: () => Promise<void>;
 
   // Properties
   provider: AlchemyProvider;
-  ownerAddress?: Address;
   scaAddress?: Address;
-  username?: string;
-  isLoggedIn: boolean;
+  magicAuth?: MagicAuth;
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -32,100 +34,143 @@ const WalletContext = createContext<WalletContextProps>({
   provider: defaultUnset,
   login: () => Promise.resolve(),
   logout: () => Promise.resolve(),
-  isLoggedIn: defaultUnset,
 });
 
 export const useWalletContext = () => useContext(WalletContext);
 
-export const WalletContextProvider = ({
-  children,
-}: {
-  children: ReactNode;
-}) => {
-  const [ownerAddress, setOwnerAddress] = useState<Address>();
-  const [scaAddress, setScaAddress] = useState<Address>();
-  const [username, setUsername] = useState<string>();
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+export const WalletProvider = ({ children }: { children: ReactNode }) => {
+  const { dispatchAlert } = useAlertContext();
 
-  const { magic, signer } = useMagicSigner();
+  const [magicAuth, setMagicAuth] = useState<MagicAuth>();
+  const [scaAddress, setScaAddress] = useState<Address>();
+
+  const {
+    magic,
+    signer,
+    login: magicLogin,
+    logout: magicLogout,
+  } = useMagicSigner();
   const { provider, connectProviderToAccount, disconnectProviderFromAccount } =
     useAlchemyProvider({ entryPointAddress });
 
   const login = useCallback(
-    async (email: string) => {
-      if (!magic || !magic.user || !signer) {
-        throw new Error("Magic not initialized");
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    async (type: MagicAuthType, ...params: any[]) => {
+      try {
+        const res = await magicLogin(type, ...params);
+        const metaData = await magic.user.getInfo();
+        console.log("metaData", metaData);
+        console.log("res", res);
+        setMagicAuth({
+          address: metaData.publicAddress,
+          isLoggedIn: true,
+          metaData,
+          did: type === "email" || type === "sms" ? String(res) : undefined,
+          email: metaData.email,
+          phoneNumber: metaData.phoneNumber,
+          oAuthRedirectResult:
+            type === "google" || type === "apple"
+              ? (res as OAuthRedirectResult)
+              : undefined,
+        });
+        dispatchAlert({
+          type: "open",
+          alertType: "success",
+          message: `Logged in using ${type}`,
+        });
+      } catch (error) {
+        console.error(error);
+        setMagicAuth({
+          address: null,
+          isLoggedIn: false,
+          metaData: null,
+        });
+        dispatchAlert({
+          type: "open",
+          alertType: "error",
+          message: `Error logging in using ${type}`,
+        });
       }
-
-      const didToken = await magic.auth.loginWithEmailOTP({
-        email,
-      });
-      const metadata = await magic.user.getMetadata();
-      if (!didToken || !metadata.publicAddress || !metadata.email) {
-        throw new Error("Magic login failed");
-      }
-
-      setIsLoggedIn(true);
-      connectProviderToAccount(signer);
-      setUsername(metadata.email);
-      setOwnerAddress(metadata.publicAddress as Address);
-      setScaAddress(await provider.getAddress());
     },
-    [magic, connectProviderToAccount, signer, provider],
+    [magicLogin, magic.user, dispatchAlert],
+  );
+
+  useAsyncEffect(
+    async () => {
+      if (!magicAuth?.isLoggedIn) {
+        return;
+      }
+      if (
+        !provider.isConnected() ||
+        (await provider.getAddress()) !== magicAuth.address
+      ) {
+        await connectProviderToAccount(signer);
+        setScaAddress(await provider.getAddress());
+        return;
+      }
+    },
+    () => Promise.resolve(),
+    [magicAuth?.isLoggedIn],
   );
 
   const logout = useCallback(async () => {
-    if (!magic || !magic.user) {
-      throw new Error("Magic not initialized");
+    try {
+      await magicLogout();
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setMagicAuth({
+        address: null,
+        isLoggedIn: false,
+        metaData: null,
+      });
+      disconnectProviderFromAccount();
+      setScaAddress(undefined);
+      dispatchAlert({
+        type: "open",
+        alertType: "info",
+        message: "Logged out",
+      });
     }
+  }, [magicLogout, disconnectProviderFromAccount, dispatchAlert]);
 
-    if (!(await magic.user.logout())) {
-      throw new Error("Magic logout failed");
-    }
-
-    setIsLoggedIn(false);
-    disconnectProviderFromAccount();
-    setUsername(undefined);
-    setOwnerAddress(undefined);
-    setScaAddress(undefined);
-  }, [magic, disconnectProviderFromAccount]);
-
-  useEffect(() => {
-    async function fetchData() {
-      if (!magic || !magic.user || !signer) {
-        throw new Error("Magic not initialized");
-      }
-
-      const isLoggedIn = await magic.user.isLoggedIn();
-
-      if (!isLoggedIn) {
+  useAsyncEffect(
+    async () => {
+      if (magicAuth) {
         return;
       }
 
-      const metadata = await magic.user.getMetadata();
-      if (!metadata.publicAddress || !metadata.email) {
-        throw new Error("Magic login failed");
+      const isLoggedIn = await magic.user.isLoggedIn();
+      if (!isLoggedIn) {
+        setMagicAuth({
+          address: null,
+          isLoggedIn: false,
+          metaData: null,
+        });
+        return;
       }
 
-      setIsLoggedIn(isLoggedIn);
-      connectProviderToAccount(signer);
-      setUsername(metadata.email);
-      setOwnerAddress(metadata.publicAddress as Address);
-      setScaAddress(await provider.getAddress());
-    }
-    fetchData();
-  }, [magic, connectProviderToAccount, signer, provider]);
+      const metaData = await magic.user.getInfo();
+      setMagicAuth({
+        address: metaData.publicAddress,
+        isLoggedIn: true,
+        metaData,
+        email: metaData.email,
+        phoneNumber: metaData.phoneNumber,
+      });
+    },
+    () => Promise.resolve(),
+    [],
+  );
 
   return (
     <WalletContext.Provider
       value={{
         login,
         logout,
-        isLoggedIn,
+        magicAuth,
         provider,
-        ownerAddress,
         scaAddress,
-        username,
       }}
     >
       {children}

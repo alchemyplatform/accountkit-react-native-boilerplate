@@ -34,33 +34,33 @@ const Navigation = () => {
 
   const renderTabIcon = (
     route: RouteProp<ParamListBase, string>,
-    focused: boolean,
+    _focused: boolean,
     color: string,
     size: number,
   ) => {
     let iconName = "home";
     switch (route.name) {
       case SCREENS.HOME:
-        iconName = focused ? "home" : "home-outline";
+        iconName = "home";
         break;
       case SCREENS.PROFILE:
-        iconName = focused ? "person" : "person-outline";
+        iconName = "user-circle";
         break;
       default:
-        iconName = focused ? "home" : "home-outline";
+        iconName = "home";
         break;
     }
     return (
       <Icon
         name={iconName}
-        type={IconType.Ionicons}
+        type={IconType.FontAwesome5}
         size={size}
         color={color}
       />
     );
   };
 
-  const renderTabNavigation = () => {
+  const TabNavigation = () => {
     return (
       <Tab.Navigator
         screenOptions={({ route }) => ({
@@ -89,7 +89,7 @@ const Navigation = () => {
       theme={isDarkMode ? DarkTheme : LightTheme}
     >
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name={SCREENS.HOME} component={renderTabNavigation} />
+        <Stack.Screen name={SCREENS.MAIN} component={TabNavigation} />
         <Stack.Screen name={SCREENS.DETAIL}>
           {(props) => <DetailScreen {...props} />}
         </Stack.Screen>

@@ -5,8 +5,13 @@ import SplashScreen from "react-native-splash-screen";
 /**
  * ? Local Imports
  */
+import { AlertProvider } from "@context/alert";
+import { Compose } from "@context/global";
+import { WalletProvider } from "@context/wallet";
 import { isAndroid } from "@freakycoder/react-native-helpers";
 import { useMagicSigner } from "@hooks/useMagicSigner";
+import Snackbar from "@shared-components/notification/SnackBar";
+import { ThemeProvider } from "react-native-paper";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import Navigation from "./src/navigation";
 
@@ -31,10 +36,18 @@ const App = () => {
   }, [scheme, isDarkMode]);
 
   return (
-    <SafeAreaProvider>
+    <Compose
+      components={[
+        SafeAreaProvider,
+        AlertProvider,
+        ThemeProvider,
+        WalletProvider,
+      ]}
+    >
       <magic.Relayer />
       <Navigation />
-    </SafeAreaProvider>
+      <Snackbar />
+    </Compose>
   );
 };
 

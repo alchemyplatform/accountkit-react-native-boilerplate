@@ -26,8 +26,8 @@ export const useAlchemyProvider = ({
   );
 
   const connectProviderToAccount = useCallback(
-    (signer: SmartAccountSigner, account?: Address) => {
-      const connectedProvider = provider
+    async (signer: SmartAccountSigner, account?: Address) => {
+      const connectedProvider = await provider
         .connect((rpcClient) => {
           return new LightSmartContractAccount({
             rpcClient,

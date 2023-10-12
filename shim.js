@@ -20,6 +20,8 @@ if (typeof Buffer === "undefined") {
   global.Buffer = require("buffer").Buffer;
 }
 
+global.TextEncoder = require("text-encoding").TextEncoder;
+
 global.atob = function atob(str) {
   return global.Buffer.from(str, "base64").toString("binary");
 };
