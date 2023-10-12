@@ -1,4 +1,3 @@
-import { DeepLinkPage } from "@magic-sdk/react-native-bare";
 import { useTheme } from "@react-navigation/native";
 import { Card } from "@rneui/themed";
 import React, { useMemo } from "react";
@@ -20,9 +19,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
   const theme = useTheme();
   const styles = useMemo(() => createStyles(theme), [theme]);
 
-  const [email, onChangeEmail] = React.useState("hiro@magic.link");
-  const [recoveryEmail, onChangerecoveryEmail] =
-    React.useState("hiro@magic.link");
+  const [email, onChangeEmail] = React.useState("your@email.com");
   const [phoneNumber, onChangePhoneNumber] = React.useState("+18888888888");
   const { magic } = useMagicSigner();
 
@@ -81,28 +78,6 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
         phoneNumber: phoneNumber,
       });
       Alert.alert(`Your DID is: ${DID}`);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  /**
-   * Recover Account
-   */
-  const recoverAccount = async () => {
-    try {
-      await magic.user.recoverAccount({ email: recoveryEmail });
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  /**
-   * Show Settings
-   */
-  const showSettings = async () => {
-    try {
-      await magic.user.showSettings({ page: DeepLinkPage.Recovery });
     } catch (err) {
       console.log(err);
     }
@@ -233,29 +208,6 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
             <Card>
               <Card.Title>Logout</Card.Title>
               <TouchableButton handler={() => logout()} title="Logout" />
-            </Card>
-            <Card>
-              <Card.Title>Recover Account</Card.Title>
-              <View style={styles.emailContainer}>
-                <Text>Email:</Text>
-                <TextInput
-                  style={styles.TextInputContainer}
-                  onChangeText={(text) => onChangerecoveryEmail(text)}
-                  value={recoveryEmail}
-                />
-              </View>
-              <View style={styles.margin10}>
-                <TouchableButton
-                  handler={() => recoverAccount()}
-                  title="Recover Account"
-                />
-              </View>
-              <View style={styles.margin10}>
-                <TouchableButton
-                  handler={() => showSettings()}
-                  title="Show Settings"
-                />
-              </View>
             </Card>
           </Card>
 

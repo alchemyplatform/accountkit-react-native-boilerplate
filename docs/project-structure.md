@@ -39,15 +39,9 @@
 │   │   ├───home
 │   │   │   ├───HomeScreen.style.ts
 │   │   │   └───HomeScreen.tsx
-│   │   ├───notification
-│   │   │   ├───NotificationScreen.style.ts
-│   │   │   └───NotificationScreen.tsx
 │   │   ├───profile
 │   │   │   ├───ProfileScreen.style.ts
 │   │   │   └───ProfileScreen.tsx
-│   │   └───search
-│   │       ├───SearchScreen.style.ts
-│   │       └───SearchScreen.tsx
 │   ├───services
 │   │   ├───api
 │   │   │   ├───api.constant.ts
