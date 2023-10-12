@@ -44,6 +44,9 @@ module.exports = {
     "jest/globals": true,
   },
   settings: {
+    react: {
+      version: "detect",
+    },
     "import/resolver": {
       node: {
         extensions: [
@@ -105,20 +108,12 @@ module.exports = {
     "react-native/no-color-literals": 0,
     "react-native/no-raw-text": 0,
     "import/no-extraneous-dependencies": 2,
-    "import/no-named-as-default-member": 2,
     "import/order": 0,
     "import/no-duplicates": 2,
     "import/no-useless-path-segments": 2,
-    "import/no-cycle": 2,
     "import/prefer-default-export": 0,
     "import/no-anonymous-default-export": 0,
-    "import/named": 0,
     "@typescript-eslint/no-empty-interface": 0,
-    "import/namespace": 0,
-    "import/default": 0,
-    "import/no-named-as-default": 0,
-    "import/no-unused-modules": 0,
-    "import/no-deprecated": 0,
     "@typescript-eslint/indent": 0,
     "react-hooks/rules-of-hooks": 2,
     "jest/no-identical-title": 2,
