@@ -8,9 +8,13 @@ interface Style {
   button: ViewStyle;
   text: TextStyle;
   loginContainer: ViewStyle;
+  infoContainer: ViewStyle;
   emailContainer: ViewStyle;
   TextInputContainer: TextStyle;
   margin10: ViewStyle;
+  row: ViewStyle;
+  column: ViewStyle;
+  bold: TextStyle;
 }
 
 export default (theme: ExtendedTheme) => {
@@ -20,18 +24,38 @@ export default (theme: ExtendedTheme) => {
       flex: 1,
       backgroundColor: colors.background,
     },
+    bold: {
+      fontWeight: "bold",
+    },
+    row: {
+      flexDirection: "row",
+      columnGap: 10,
+    },
+    column: {
+      flexDirection: "column",
+      rowGap: 10,
+    },
     contentContainer: {
       paddingTop: 30,
     },
     TextInputContainer: {
       borderColor: "black",
       borderWidth: 1,
-      width: "80%",
-      height: 30,
+      marginStart: 10,
       paddingHorizontal: 10,
+      textAlign: "center",
+      height: 30,
+      minWidth: 200,
+      borderRadius: 4,
+    },
+    infoContainer: {
+      alignItems: "flex-start",
+      marginTop: 10,
+      paddingHorizontal: 20,
+      rowGap: 10,
     },
     loginContainer: {
-      alignItems: "flex-start",
+      alignItems: "center",
       marginTop: 10,
       paddingHorizontal: 20,
     },
