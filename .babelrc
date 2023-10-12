@@ -7,6 +7,7 @@
         "root": ["./src"],
         "alias": [
           { "@shared-components": "./src/shared/components" },
+          { "@shared-config": "./src/shared/config" },
           { "@shared-constants": "./src/shared/constants" },
           { "@font-size": "./src/shared/theme/font-size" },
           { "@api": "./src/services/api/index" },
@@ -19,7 +20,9 @@
           { "@utils": "./src/utils/" },
           { "@assets": "./src/assets/" },
           { "@event-emitter": "./src/services/event-emitter" },
-          { "@local-storage": "./src/services/local-storage" }
+          { "@local-storage": "./src/services/local-storage" },
+          { "@hooks": "./src/hooks" },
+          { "@context": "./src/context" }
         ],
         "extensions": [".js", ".jsx", ".ts", ".tsx"]
       }

@@ -1,12 +1,14 @@
+import React, { useEffect } from "react";
+import { LogBox, StatusBar, useColorScheme } from "react-native";
 import "react-native-gesture-handler";
-import React from "react";
-import { StatusBar, useColorScheme, LogBox } from "react-native";
 import SplashScreen from "react-native-splash-screen";
 /**
  * ? Local Imports
  */
-import Navigation from "./src/navigation";
 import { isAndroid } from "@freakycoder/react-native-helpers";
+import { useMagicSigner } from "@hooks/useMagicSigner";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import Navigation from "./src/navigation";
 
 LogBox.ignoreAllLogs();
 
@@ -14,7 +16,9 @@ const App = () => {
   const scheme = useColorScheme();
   const isDarkMode = scheme === "dark";
 
-  React.useEffect(() => {
+  const { magic } = useMagicSigner();
+
+  useEffect(() => {
     StatusBar.setBarStyle(isDarkMode ? "light-content" : "dark-content");
     if (isAndroid) {
       StatusBar.setBackgroundColor("rgba(0,0,0,0)");
@@ -27,9 +31,10 @@ const App = () => {
   }, [scheme, isDarkMode]);
 
   return (
-    <>
+    <SafeAreaProvider>
+      <magic.Relayer />
       <Navigation />
-    </>
+    </SafeAreaProvider>
   );
 };
 
