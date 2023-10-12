@@ -1,7 +1,7 @@
 import { useTheme } from "@react-navigation/native";
 import { Card } from "@rneui/themed";
-import React, { useEffect, useMemo, useState } from "react";
-import { Alert, Pressable, Text, TextInput, View } from "react-native";
+import React, { useMemo } from "react";
+import { Pressable, Text, TextInput, View } from "react-native";
 import {
   GestureHandlerRootView,
   ScrollView,
@@ -11,10 +11,6 @@ import {
  * ? Local Imports
  */
 import { useMagicSigner } from "@hooks/useMagicSigner";
-import { OAuthRedirectResult } from "@magic-ext/react-native-bare-oauth";
-import { MagicUserMetadata } from "@magic-sdk/react-native-bare";
-import eventEmitter from "@services/event-emitter";
-import console from "console";
 import createStyles from "./ProfileScreen.style";
 
 interface ProfileScreenProps {}
@@ -23,106 +19,20 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
   const theme = useTheme();
   const styles = useMemo(() => createStyles(theme), [theme]);
 
-  const [email, onChangeEmail] = useState<string | undefined>();
-  const [phoneNumber, onChangePhoneNumber] = useState<string | undefined>();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [metaData, setMetaData] = useState<MagicUserMetadata | undefined>();
-  const [oAuthRedirectResult, setOAuthRedirectResult] = useState<
-    OAuthRedirectResult | undefined
-  >();
-
-  const { magic } = useMagicSigner();
-
-  useEffect(() => {
-    eventEmitter.addListener("account", () => {
-      magic.user.getInfo().then((metadata) => {
-        setMetaData(metadata);
-      });
-    });
-    return () => {
-      eventEmitter.removeAllListeners("account");
-    };
-  }, [magic.user]);
-
-  useEffect(() => {
-    magic.user.isLoggedIn().then((_isLoggedIn) => {
-      setIsLoggedIn(_isLoggedIn);
-      if (_isLoggedIn && metaData === undefined) {
-        magic.user.getInfo().then((metadata) => {
-          setMetaData(metadata);
-        });
-      }
-    });
-  }, [magic.user, oAuthRedirectResult, metaData]);
-
-  /**
-   *Google sign in
-   * */
-  const magicGoogleSignIn = async () => {
-    const res = await magic.oauth.loginWithPopup({
-      provider: "google",
-      redirectURI: "accountkitboilerplate://",
-    });
-    setOAuthRedirectResult(res);
-  };
-
-  /**
-   *Apple sign in
-   * */
-  const magicAppleSignIn = async () => {
-    const res = await magic.oauth.loginWithPopup({
-      provider: "apple",
-      redirectURI: "accountkitboilerplate://",
-    });
-    setOAuthRedirectResult(res);
-  };
-
-  /**
-   * email otp sign in
-   * */
-  const loginEmailOTP = async () => {
-    try {
-      await magic.auth.loginWithEmailOTP({ email: email! });
-      const res = await magic.user.getInfo();
-      setMetaData(res);
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
-  /**
-   * sms sign in
-   **/
-  const smsLogin = async () => {
-    try {
-      const DID = await magic.auth.loginWithSMS({
-        phoneNumber: phoneNumber!,
-      });
-      eventEmitter.emit("account", DID);
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
-  /** Magic Connect w/ UI  */
-  const showMCUserInterface = async () => {
-    try {
-      const account = await magic.wallet.connectWithUI();
-      Alert.alert(`Your Public address is: ${account[0]}`);
-      eventEmitter.emit("account", account[0]);
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
-  const logout = async () => {
-    await magic.user.logout();
-    setIsLoggedIn(false);
-    setMetaData(undefined);
-    setOAuthRedirectResult(undefined);
-    onChangeEmail(undefined);
-    onChangePhoneNumber(undefined);
-  };
+  const {
+    email,
+    metaData,
+    setEmail,
+    phoneNumber,
+    setPhoneNumber,
+    magicGoogleSignIn,
+    magicAppleSignIn,
+    loginEmailOTP,
+    isLoggedIn,
+    smsLogin,
+    logout,
+    showMCUserInterface,
+  } = useMagicSigner();
 
   const TouchableButton = (props: { handler: () => void; title: string }) => (
     <View style={styles.actionContainer}>
@@ -141,7 +51,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
           <View style={styles.emailContainer}>
             <TextInput
               style={styles.TextInputContainer}
-              onChangeText={(text) => onChangeEmail(text)}
+              onChangeText={(text) => setEmail(text)}
               value={email}
               placeholder="Enter your email"
             />
@@ -159,7 +69,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
             <TextInput
               placeholder="Enter your phone number"
               style={styles.TextInputContainer}
-              onChangeText={(number) => onChangePhoneNumber(number)}
+              onChangeText={(number) => setPhoneNumber(number)}
               value={phoneNumber}
             />
           </View>
