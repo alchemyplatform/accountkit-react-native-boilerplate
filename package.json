@@ -21,6 +21,7 @@
     "@tradle/react-native-http": "^2.0.1",
     "axios": "^0.27.2",
     "axios-hooks": "^3.1.4",
+    "big-integer": "^1.6.51",
     "events": "^3.3.0",
     "https-browserify": "^1.0.0",
     "lodash": "^4.17.21",

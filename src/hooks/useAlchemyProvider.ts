@@ -26,10 +26,12 @@ export const useAlchemyProvider = ({
   );
 
   const connectProviderToAccount = useCallback(
-    async (signer: SmartAccountSigner, account?: Address) => {
-      const connectedProvider = await provider
+    (signer: SmartAccountSigner, account?: Address) => {
+      console.log(signer.signerType, account);
+      const connectedProvider = provider
         .connect((rpcClient) => {
-          return new LightSmartContractAccount({
+          console.log(`Connecting account ${account} to alchemy provider`);
+          const a = new LightSmartContractAccount({
             rpcClient,
             owner: signer,
             chain,
@@ -37,12 +39,15 @@ export const useAlchemyProvider = ({
             factoryAddress: lightAccountFactoryAddress,
             accountAddress: account,
           });
+          console.log("?????????", a);
+          return a;
         })
         .withAlchemyGasManager({
           policyId: gasManagerPolicyId,
           entryPoint: entryPointAddress,
         });
 
+      console.log("?????????");
       setProvider(connectedProvider);
 
       console.log(

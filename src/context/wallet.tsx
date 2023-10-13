@@ -13,6 +13,7 @@ import React, {
   useState,
 } from "react";
 import { MagicAuth, MagicAuthType } from "types/magic";
+import { Hex } from "viem";
 import { useAlertContext } from "./alert";
 
 type WalletContextProps = {
@@ -97,14 +98,14 @@ export const WalletProvider = ({ children }: { children: ReactNode }) => {
 
   useAsyncEffect(
     async () => {
-      if (!magicAuth?.isLoggedIn) {
+      if (magicAuth === undefined || !magicAuth.isLoggedIn) {
         return;
       }
       if (
         !provider.isConnected() ||
         (await provider.getAddress()) !== magicAuth.address
       ) {
-        await connectProviderToAccount(signer);
+        await connectProviderToAccount(signer, magicAuth.address as Hex);
         setScaAddress(await provider.getAddress());
         return;
       }
@@ -158,6 +159,16 @@ export const WalletProvider = ({ children }: { children: ReactNode }) => {
         email: metaData.email,
         phoneNumber: metaData.phoneNumber,
       });
+
+      console.log("User already logged in", metaData, provider.isConnected());
+      if (provider.isConnected()) {
+        setScaAddress(await provider.getAddress());
+        return;
+      } else {
+        await connectProviderToAccount(signer, metaData.publicAddress as Hex);
+        setScaAddress(await provider.getAddress());
+        return;
+      }
     },
     () => Promise.resolve(),
     [],

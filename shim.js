@@ -15,12 +15,19 @@ if (typeof process === "undefined") {
   }
 }
 
+const TextEncodingPolyfill = require("text-encoding");
+const BigInt = require("big-integer");
+
+Object.assign(global, {
+  TextEncoder: TextEncodingPolyfill.TextEncoder,
+  TextDecoder: TextEncodingPolyfill.TextDecoder,
+  BigInt: BigInt,
+});
+
 process.browser = false;
 if (typeof Buffer === "undefined") {
   global.Buffer = require("buffer").Buffer;
 }
-
-global.TextEncoder = require("text-encoding").TextEncoder;
 
 global.atob = function atob(str) {
   return global.Buffer.from(str, "base64").toString("binary");
