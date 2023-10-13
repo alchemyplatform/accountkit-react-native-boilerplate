@@ -15,14 +15,21 @@ if (typeof process === "undefined") {
   }
 }
 
-const TextEncodingPolyfill = require("text-encoding");
-const BigInt = require("big-integer");
+// const TextEncodingPolyfill = require("fastestsmallesttextencoderdecoder");
+// const BigInt = require("big-integer");
 
-Object.assign(global, {
-  TextEncoder: TextEncodingPolyfill.TextEncoder,
-  TextDecoder: TextEncodingPolyfill.TextDecoder,
-  BigInt: BigInt,
-});
+// Object.assign(global, {
+//   TextEncoder: TextEncodingPolyfill.TextEncoder,
+//   TextDecoder: TextEncodingPolyfill.TextDecoder,
+//   BigInt: BigInt,
+// });
+
+// if (typeof TextEncoder === "undefined") {
+//   global.TextEncoder = require("fastestsmallesttextencoderdecoder").TextEncoder;
+// }
+// if (typeof TextDecoder === "undefined") {
+//   global.TextDecoder = require("fastestsmallesttextencoderdecoder").TextDecoder;
+// }
 
 process.browser = false;
 if (typeof Buffer === "undefined") {

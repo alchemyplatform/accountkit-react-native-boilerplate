@@ -5,6 +5,8 @@
 // from rn-nodeify
 import "./shim";
 
+import "fastestsmallesttextencoderdecoder";
+
 // for uuid (& web3 if you plan to use it)
 import "react-native-get-random-values";
 

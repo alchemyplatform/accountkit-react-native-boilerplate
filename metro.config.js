@@ -8,6 +8,7 @@
 module.exports = {
   resolver: {
     extraNodeModules: require("node-libs-browser"),
+    unstable_enablePackageExports: true,
   },
   transformer: {
     getTransformOptions: async () => ({
