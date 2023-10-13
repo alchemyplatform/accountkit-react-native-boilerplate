@@ -1,6 +1,6 @@
 import { LightSmartContractAccount } from "@alchemy/aa-accounts";
 import { AlchemyProvider } from "@alchemy/aa-alchemy";
-import { EntryPointAbi, SmartAccountSigner } from "@alchemy/aa-core";
+import { SmartAccountSigner } from "@alchemy/aa-core";
 import { useCallback, useState } from "react";
 import {
   alchemyRpcUrl,
@@ -8,7 +8,7 @@ import {
   gasManagerPolicyId,
   lightAccountFactoryAddress,
 } from "shared/config/env";
-import { Address, getContract } from "viem";
+import { Address } from "viem";
 
 type AlchemyProviderProps = {
   entryPointAddress: Address;
@@ -25,23 +25,11 @@ export const useAlchemyProvider = ({
     }),
   );
 
-  console.log("entryPointAddress !!!!!!!!!!!!!!", entryPointAddress);
-  const entryPoint = getContract({
-    address: entryPointAddress,
-    abi: EntryPointAbi,
-    // Need to cast this as PublicClient or else it breaks ABI typing.
-    // This is valid because our PublicClient is a subclass of PublicClient
-    publicClient: provider.rpcClient,
-  });
-  console.log("entryPoint", entryPoint);
-
   const connectProviderToAccount = useCallback(
     (signer: SmartAccountSigner, account?: Address) => {
-      console.log(signer.signerType, account);
       const connectedProvider = provider
         .connect((rpcClient) => {
-          console.log(`Connecting account ${account} to alchemy provider`);
-          const a = new LightSmartContractAccount({
+          return new LightSmartContractAccount({
             rpcClient,
             owner: signer,
             chain,
@@ -49,15 +37,12 @@ export const useAlchemyProvider = ({
             factoryAddress: lightAccountFactoryAddress,
             accountAddress: account,
           });
-          console.log("?????????", a);
-          return a;
         })
         .withAlchemyGasManager({
           policyId: gasManagerPolicyId,
           entryPoint: entryPointAddress,
         });
 
-      console.log("?????????");
       setProvider(connectedProvider);
 
       console.log(

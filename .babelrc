@@ -10,6 +10,7 @@
           { "@shared-config": "./src/shared/config" },
           { "@shared-constants": "./src/shared/constants" },
           { "@font-size": "./src/shared/theme/font-size" },
+          { "@abi": "./src/abi" },
           { "@api": "./src/services/api/index" },
           { "@fonts": "./src/shared/theme/fonts" },
           { "@colors": "./src/shared/theme/colors" },
