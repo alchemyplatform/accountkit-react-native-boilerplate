@@ -34,7 +34,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
           {/* Magic Auth Sign-in */}
           {magicAuth?.isLoggedIn ? (
             <Card>
-              <Card.Title>My Info</Card.Title>
+              <Card.Title>Account Info</Card.Title>
               <View style={styles.infoContainer}>
                 {magicAuth.email && (
                   <View style={styles.row}>
@@ -46,6 +46,12 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
                   <View style={styles.row}>
                     <Text style={styles.bold}>Phone Number:</Text>
                     <Text>{magicAuth.phoneNumber}</Text>
+                  </View>
+                )}
+                {magicAuth.oAuthRedirectResult && (
+                  <View style={styles.row}>
+                    <Text style={styles.bold}>Provider:</Text>
+                    <Text>{magicAuth.oAuthRedirectResult.oauth.provider}</Text>
                   </View>
                 )}
                 <View style={styles.column}>

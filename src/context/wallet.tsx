@@ -13,7 +13,6 @@ import React, {
   useState,
 } from "react";
 import { MagicAuth, MagicAuthType } from "types/magic";
-import { Hex } from "viem";
 import { useAlertContext } from "./alert";
 
 type WalletContextProps = {
@@ -105,7 +104,7 @@ export const WalletProvider = ({ children }: { children: ReactNode }) => {
         !provider.isConnected() ||
         (await provider.getAddress()) !== magicAuth.address
       ) {
-        await connectProviderToAccount(signer, magicAuth.address as Hex);
+        await connectProviderToAccount(signer);
         setScaAddress(await provider.getAddress());
         return;
       }
@@ -165,7 +164,7 @@ export const WalletProvider = ({ children }: { children: ReactNode }) => {
         setScaAddress(await provider.getAddress());
         return;
       } else {
-        await connectProviderToAccount(signer, metaData.publicAddress as Hex);
+        await connectProviderToAccount(signer);
         setScaAddress(await provider.getAddress());
         return;
       }

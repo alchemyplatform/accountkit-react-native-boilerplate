@@ -19,6 +19,7 @@
     "@rneui/base": "^4.0.0-rc.8",
     "@rneui/themed": "^4.0.0-rc.8",
     "@tradle/react-native-http": "^2.0.1",
+    "abitype": "^0.10.1",
     "axios": "^0.27.2",
     "axios-hooks": "^3.1.4",
     "big-integer": "^1.6.51",
