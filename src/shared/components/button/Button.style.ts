@@ -10,28 +10,23 @@ interface Style {
 export default (theme: ExtendedTheme) => {
   const { colors } = theme;
   return StyleSheet.create<Style>({
-    actionContainer: {
-      flex: 1,
-      flexDirection: "row",
-      alignItems: "center",
-      alignSelf: "center",
-    },
+    actionContainer: {},
     button: {
-      height: 35,
+      height: 36,
       alignItems: "center",
       justifyContent: "center",
       paddingVertical: 7,
-      paddingHorizontal: 32,
+      paddingHorizontal: 12,
       borderRadius: 4,
       elevation: 3,
-      backgroundColor: colors.secondary,
+      backgroundColor: colors.primary,
     },
     text: {
       fontSize: 16,
       lineHeight: 21,
       fontWeight: "bold",
       letterSpacing: 0.25,
-      color: colors.text,
+      color: colors.white,
     },
   });
 };

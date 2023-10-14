@@ -71,7 +71,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
 
   const Welcome = () => (
     <>
-      <Text h2 bold color={colors.text}>
+      <Text h2 bold color={colors.text} style={{ marginBottom: 12 }}>
         Hello {magicAuth!.email?.split("@")[0] ?? "User"}
       </Text>
       <Text

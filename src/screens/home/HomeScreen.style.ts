@@ -58,9 +58,9 @@ export default (theme: ExtendedTheme) => {
       marginTop: 8,
     },
     profilePicImageStyle: {
-      height: 50,
-      width: 50,
-      borderRadius: 30,
+      height: 36,
+      width: 36,
+      borderRadius: 18,
     },
   });
 };

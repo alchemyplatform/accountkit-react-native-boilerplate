@@ -75,6 +75,8 @@ const Navigation = () => {
           tabBarInactiveTintColor: "gray",
           tabBarStyle: {
             backgroundColor: isDarkMode ? palette.black : palette.white,
+            paddingTop: 12,
+            height: 90,
           },
         })}
       >
@@ -94,6 +96,8 @@ const Navigation = () => {
           tabBarInactiveTintColor: "gray",
           tabBarStyle: {
             backgroundColor: isDarkMode ? palette.black : palette.white,
+            paddingTop: 12,
+            height: 90,
           },
         })}
       >
@@ -115,7 +119,7 @@ const Navigation = () => {
         {magicAuth?.isLoggedIn ? (
           <Stack.Screen name={SCREENS.MAIN} component={TabNavigation} />
         ) : (
-          <Stack.Screen name={SCREENS.LOGIN} component={AuthNavigation} />
+          <Stack.Screen name={SCREENS.AUTH} component={AuthNavigation} />
         )}
         <Stack.Screen name={SCREENS.DETAIL}>
           {(props) => <DetailScreen {...props} />}

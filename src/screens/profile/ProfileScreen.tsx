@@ -27,11 +27,14 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
       <GestureHandlerRootView style={{ flex: 1 }}>
         <ScrollView
           style={styles.container}
-          contentContainerStyle={styles.contentContainer}
+          contentContainerStyle={[
+            styles.contentContainer,
+            { flexGrow: 1, justifyContent: "center" },
+          ]}
           keyboardShouldPersistTaps="handled"
         >
           <Card>
-            <Card.Title>Account Info</Card.Title>
+            <Card.Title style={{ marginVertical: 24 }}>Account Info</Card.Title>
             <View style={styles.infoContainer}>
               {magicAuth!.email && (
                 <View style={styles.row}>
@@ -68,7 +71,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
                 </View>
               )}
             </View>
-            <View style={styles.margin10}>
+            <View style={[styles.margin10, { marginVertical: 24 }]}>
               <TouchableButton handler={() => logout()} title="Logout" />
             </View>
           </Card>

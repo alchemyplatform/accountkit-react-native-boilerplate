@@ -8,7 +8,7 @@ import {
   View,
   ViewStyle,
 } from "react-native";
-import createStyles from "./TouchableButton.style";
+import createStyles from "./Button.style";
 
 export const TouchableButton = (props: {
   handler: () => void;
@@ -16,6 +16,7 @@ export const TouchableButton = (props: {
   containerStyle?: StyleProp<ViewStyle>;
   buttonsStyle?: StyleProp<ViewStyle>;
   textStyle?: StyleProp<TextStyle>;
+  disabled?: boolean;
 }) => {
   const theme = useTheme();
   const styles = React.useMemo(() => createStyles(theme), [theme]);
@@ -23,7 +24,12 @@ export const TouchableButton = (props: {
   return (
     <View style={[styles.actionContainer, props.containerStyle]}>
       <Pressable
-        style={[styles.button, props.buttonsStyle]}
+        style={[
+          styles.button,
+          props.buttonsStyle,
+          props.disabled ? { opacity: 0.5 } : {},
+        ]}
+        disabled={props.disabled}
         onPress={() => props.handler()}
       >
         <Text style={[styles.text, props.textStyle]}>{props.title}</Text>

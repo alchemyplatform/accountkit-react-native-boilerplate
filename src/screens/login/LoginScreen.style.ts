@@ -44,7 +44,7 @@ export default (theme: ExtendedTheme) => {
       marginStart: 10,
       paddingHorizontal: 10,
       textAlign: "center",
-      height: 30,
+      height: 48,
       minWidth: 200,
       borderRadius: 4,
     },
