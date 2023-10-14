@@ -1,3 +1,4 @@
+import { useTheme } from "@react-navigation/native";
 import * as React from "react";
 import {
   Pressable,
@@ -7,7 +8,6 @@ import {
   View,
   ViewStyle,
 } from "react-native";
-import { useTheme } from "react-native-paper";
 import createStyles from "./TouchableButton.style";
 
 export const TouchableButton = (props: {

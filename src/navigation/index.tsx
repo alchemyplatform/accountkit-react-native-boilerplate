@@ -15,8 +15,10 @@ import { isReadyRef, navigationRef } from "react-navigation-helpers";
 import { SCREENS } from "@shared-constants";
 import { DarkTheme, LightTheme, palette } from "@theme/themes";
 // ? Screens
+import { useWalletContext } from "@context/wallet";
 import DetailScreen from "@screens/detail/DetailScreen";
 import HomeScreen from "@screens/home/HomeScreen";
+import LoginScreen from "@screens/login/LoginScreen";
 import ProfileScreen from "@screens/profile/ProfileScreen";
 
 // ? If you want to use stack or tab or both
@@ -26,6 +28,8 @@ const Stack = createStackNavigator();
 const Navigation = () => {
   const scheme = useColorScheme();
   const isDarkMode = scheme === "dark";
+
+  const { magicAuth } = useWalletContext();
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   React.useEffect((): any => {
@@ -60,6 +64,25 @@ const Navigation = () => {
     );
   };
 
+  const AuthNavigation = () => {
+    return (
+      <Tab.Navigator
+        screenOptions={({ route }) => ({
+          headerShown: false,
+          tabBarIcon: ({ focused, color, size }) =>
+            renderTabIcon(route, focused, color, size),
+          tabBarActiveTintColor: palette.primary,
+          tabBarInactiveTintColor: "gray",
+          tabBarStyle: {
+            backgroundColor: isDarkMode ? palette.black : palette.white,
+          },
+        })}
+      >
+        <Tab.Screen name={SCREENS.LOGIN} component={LoginScreen} />
+      </Tab.Navigator>
+    );
+  };
+
   const TabNavigation = () => {
     return (
       <Tab.Navigator
@@ -89,7 +112,11 @@ const Navigation = () => {
       theme={isDarkMode ? DarkTheme : LightTheme}
     >
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name={SCREENS.MAIN} component={TabNavigation} />
+        {magicAuth?.isLoggedIn ? (
+          <Stack.Screen name={SCREENS.MAIN} component={TabNavigation} />
+        ) : (
+          <Stack.Screen name={SCREENS.LOGIN} component={AuthNavigation} />
+        )}
         <Stack.Screen name={SCREENS.DETAIL}>
           {(props) => <DetailScreen {...props} />}
         </Stack.Screen>

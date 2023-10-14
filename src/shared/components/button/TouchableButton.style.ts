@@ -24,7 +24,7 @@ export default (theme: ExtendedTheme) => {
       paddingHorizontal: 32,
       borderRadius: 4,
       elevation: 3,
-      backgroundColor: colors.primary,
+      backgroundColor: colors.secondary,
     },
     text: {
       fontSize: 16,
