@@ -20,7 +20,7 @@
     "@rneui/themed": "^4.0.0-rc.8",
     "@tradle/react-native-http": "^2.0.1",
     "abitype": "^0.10.1",
-    "axios": "^0.27.2",
+    "axios": "^0.30.0",
     "axios-hooks": "^3.1.4",
     "babel-plugin-inline-import": "^3.0.0",
     "big-integer": "^1.6.51",
@@ -60,7 +60,7 @@
   "devDependencies": {
     "@babel/core": "^7.20.0",
     "@babel/preset-env": "^7.20.0",
-    "@babel/runtime": "^7.20.0",
+    "@babel/runtime": "^7.27.6",
     "@commitlint/cli": "^17.7.2",
     "@commitlint/config-conventional": "^17.7.0",
     "@tsconfig/react-native": "^2.0.2",
