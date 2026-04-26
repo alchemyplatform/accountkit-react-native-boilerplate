@@ -5,12 +5,12 @@
   "dependencies": {
     "@alchemy/aa-accounts": "^0.1.0",
     "@alchemy/aa-alchemy": "^0.1.0",
-    "@alchemy/aa-core": "^0.1.0",
+    "@alchemy/aa-core": "3.0.0-alpha.1",
     "@freakycoder/react-native-bounceable": "1.0.3",
     "@freakycoder/react-native-custom-text": "0.1.2",
     "@freakycoder/react-native-helpers": "2.0.0",
-    "@magic-ext/react-native-bare-oauth": "^15.1.1",
-    "@magic-sdk/react-native-bare": "^21.1.1",
+    "@magic-ext/react-native-bare-oauth": "26.0.3-canary.864.14041797160.0",
+    "@magic-sdk/react-native-bare": "30.0.0",
     "@react-native-async-storage/async-storage": "^1.19.3",
     "@react-native-masked-view/masked-view": "^0.2.7",
     "@react-navigation/bottom-tabs": "^6.3.2",
@@ -20,8 +20,8 @@
     "@rneui/themed": "^4.0.0-rc.8",
     "@tradle/react-native-http": "^2.0.1",
     "abitype": "^0.10.1",
-    "axios": "^0.27.2",
-    "axios-hooks": "^3.1.4",
+    "axios": "0.31.0",
+    "axios-hooks": "5.1.1",
     "babel-plugin-inline-import": "^3.0.0",
     "big-integer": "^1.6.51",
     "events": "^3.3.0",
@@ -54,8 +54,8 @@
     "rn-nodeify": "^10.3.0",
     "stream-browserify": "^3.0.0",
     "text-encoding": "^0.7.0",
-    "uuid": "^9.0.1",
-    "viem": "^1.16.2"
+    "uuid": "14.0.0",
+    "viem": "2.15.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
