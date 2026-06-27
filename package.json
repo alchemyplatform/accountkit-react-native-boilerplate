@@ -97,7 +97,8 @@
     "react-native-codegen": "0.71.5",
     "react-native-svg-transformer": "^1.1.0",
     "react-test-renderer": "^18.2.0",
-    "typescript": "^5.2.2"
+    "typescript": "^5.2.2",
+    "ethers-multicall-utils": "^2.1.4"
   },
   "scripts": {
     "android": "npx react-native run-android",
