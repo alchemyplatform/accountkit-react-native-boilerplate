@@ -20,7 +20,7 @@
     "@rneui/themed": "^4.0.0-rc.8",
     "@tradle/react-native-http": "^2.0.1",
     "abitype": "^0.10.1",
-    "axios": "^0.27.2",
+    "axios": "0.33.0",
     "axios-hooks": "^3.1.4",
     "babel-plugin-inline-import": "^3.0.0",
     "big-integer": "^1.6.51",
@@ -54,7 +54,7 @@
     "rn-nodeify": "^10.3.0",
     "stream-browserify": "^3.0.0",
     "text-encoding": "^0.7.0",
-    "uuid": "^9.0.1",
+    "uuid": "11.1.1",
     "viem": "^1.16.2"
   },
   "devDependencies": {
